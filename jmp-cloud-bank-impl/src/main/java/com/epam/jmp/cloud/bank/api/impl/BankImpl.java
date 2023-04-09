@@ -1,4 +1,4 @@
-package com.epam.bank.api.impl;
+package com.epam.jmp.cloud.bank.api.impl;
 
 import com.epam.jmp.bank.api.Bank;
 import com.epam.jmp.dto.BankCard;

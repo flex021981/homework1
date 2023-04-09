@@ -16,7 +16,7 @@ public class ServiceImpl implements Service {
         User user = bankCard.getUser();
         String number = bankCard.getNumber();
         Subscription subscription = new Subscription(number, LocalDate.now());
-        storage.getOrDefault(user, new LinkedList<>()).add(subscription);
+        storage.computeIfAbsent(user, u -> new LinkedList<>()).add(subscription);
     }
 
     @Override
