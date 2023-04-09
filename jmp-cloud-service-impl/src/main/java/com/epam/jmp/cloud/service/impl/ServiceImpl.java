@@ -7,6 +7,7 @@ import com.epam.jmp.service.api.Service;
 
 import java.time.LocalDate;
 import java.util.*;
+import java.util.function.Predicate;
 
 public class ServiceImpl implements Service {
     private final Map<User, List<Subscription>> storage = new HashMap<>();
@@ -21,9 +22,14 @@ public class ServiceImpl implements Service {
 
     @Override
     public Optional<Subscription> getSubscriptionByBankCardNumber(String number) {
+        return getSubscriptionByBankCardNumber(s -> s.bankcard().equals(number));
+    }
+
+    @Override
+    public Optional<Subscription> getSubscriptionByBankCardNumber(Predicate<Subscription> filter) {
         return storage.values().stream()
                 .flatMap(Collection::stream)
-                .filter(subscription -> subscription.bankcard().equals(number))
+                .filter(filter)
                 .findFirst();
     }
 
