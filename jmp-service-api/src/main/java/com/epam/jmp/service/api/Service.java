@@ -11,4 +11,10 @@ public interface Service {
     void subscribe(BankCard bankCard);
     Optional<Subscription> getSubscriptionByBankCardNumber(String number);
     List<User> getAllUsers();
+    default double getAverageUsersAge() {
+        return getAllUsers().stream()
+                .mapToDouble(u -> u.birthday().toEpochDay())
+                .average()
+                .orElse(0);
+    }
 }
